@@ -30,6 +30,7 @@ carenv/
 # Project specific
 settings.py
 settings_local.py
+pipelines.py
 
 crawl/crawl/spiders/basic.py
 crawl/crawl/spiders/deneme.py
