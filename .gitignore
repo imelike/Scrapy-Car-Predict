@@ -1,0 +1,40 @@
+# Scrapy
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.db
+
+# Scraped data
+*.json
+*.jl
+*.csv
+
+# Logs
+*.log
+
+# Virtual environment
+venv/
+env/
+ENV/
+.env
+carenv/
+
+# IDE files
+.vscode/
+*.idea/
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# Project specific
+settings.py
+settings_local.py
+
+crawl/crawl/spiders/basic.py
+crawl/crawl/spiders/deneme.py
+crawl/crawl/spiders/sahibinden.py
+
+# Ignore files with sensitive information (credentials, API keys, etc.)
+*.secrets
+*.credentials
