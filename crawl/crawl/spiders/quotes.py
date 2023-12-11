@@ -1,13 +1,22 @@
 import scrapy
+from scrapy.http import FormRequest
+from scrapy.utils.response import open_in_browser
 from ..items import CrawlItem
 
 class QuotesSpider(scrapy.Spider):
     name = "quotes"
-    allowed_domains = ["quotes.toscrape.com"]
-    start_urls = ["https://quotes.toscrape.com"]
+    start_urls = ["https://quotes.toscrape.com/login"]
 
     def parse(self, response):
+        token = response.xpath('//form/input[@name="csrf_token"]/@value').extract_first()
+        return FormRequest.from_response(response,formdata={
+            'csrf_token': token,
+            'username': 'imelike',
+            'password': 'imelike'
+        }, callback=self.start_scraping)
 
+    def start_scraping(self, response):
+        open_in_browser(response)
         items = CrawlItem()
 
         all_div_quotes = response.xpath('//div[@class="quote"]')
@@ -22,10 +31,6 @@ class QuotesSpider(scrapy.Spider):
             items['tags'] = tags
 
             yield items
-
-        # ikisi de aynı sonucu verir
-        #title = response.xpath('//div[@class="col-md-8"]/h1/a/text()').extract_first()
-        # #title = response.xpath('//div[@class="col-md-8"]/h1/a/text()').get(
 
 
 
